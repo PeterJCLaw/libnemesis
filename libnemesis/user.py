@@ -6,14 +6,19 @@ import srusers
 from team import Team
 from college import College
 import constants
+from ldap_manager import LDAPObjectManager
+
 
 class User(object):
     @classmethod
-    def create_user(cls, username, password=None):
+    def create_user(cls, username, password=None, ldap_manager=None):
+        if not ldap_manager:
+            ldap_manager = LDAPObjectManager()
+
         if User.can_authenticate(username, password):
-            return AuthenticatedUser(username, password)
+            return AuthenticatedUser(username, password, ldap_manager)
         else:
-            return User(username)
+            return User(username, ldap_manager)
 
     @classmethod
     def email_used(cls, email):
@@ -42,16 +47,20 @@ class User(object):
         u.sname = last_name
         u.email = ''
         u.save()
-        return User(username)
+        return User.create_user(username)
 
     @classmethod
     def can_authenticate(cls, username, password):
         return password is not None and srusers.user(username).bind(password)
 
-    def __init__(self, username):
+    def __init__(self, username, ldap_manager):
         self._user = srusers.user(username)
         if not self._user.in_db:
             raise Exception("user '%s' does not exist in database" % (username))
+
+        self._ldap_manager = ldap_manager
+        if not self._ldap_manager:
+            raise ValueError("Need an LDAP object manager")
 
         # cache any groups we change, since searching the database for them
         # after our changes will yield very odd results.
@@ -157,7 +166,7 @@ class User(object):
     @property
     def teams(self):
         return set(
-            Team(g)
+            self._ldap_manager.get(Team, g)
             for g in self._team_group_names
         )
 
@@ -168,7 +177,7 @@ class User(object):
     @property
     def colleges(self):
         return [
-            College(g)
+            self._ldap_manager.get(College, g)
             for g in self._college_group_names
         ]
 
@@ -213,7 +222,7 @@ class User(object):
     def can_administrate(self, other_user_or_username):
         #if it's a string return the internal comparison with a user object
         if isinstance(other_user_or_username, basestring):
-            other_user_or_username = User(other_user_or_username)
+            other_user_or_username = self._ldap_manager.get(User, other_user_or_username)
 
         return self._can_administrate(other_user_or_username)
 
@@ -270,7 +279,7 @@ class User(object):
         self._user.delete()
 
 class AuthenticatedUser(User):
-    def __init__(self, username, password):
+    def __init__(self, username, password, ldap_manager):
         # check their password
         user = srusers.user(username)
         assert user.bind(password)
@@ -278,7 +287,7 @@ class AuthenticatedUser(User):
         # Call parent init, which will, among other things, ensure that the
         # LDAP binding goes back to being via the manager credential, not the
         # one we just checked above.
-        super(AuthenticatedUser, self).__init__(username)
+        super(AuthenticatedUser, self).__init__(username, ldap_manager)
 
         self._viewable_users_cache = set()
 

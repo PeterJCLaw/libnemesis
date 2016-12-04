@@ -1,6 +1,8 @@
 import srusers
 import json
+from ldap_manager import LDAPObjectManager
 from user import AuthenticatedUser, NullUser
+
 
 class AuthHelper:
     def __init__(self, req):
@@ -37,7 +39,11 @@ class AuthHelper:
     @property
     def user(self):
         if self.auth_will_succeed:
-            return AuthenticatedUser(self.form["username"], self.form["password"])
+            return AuthenticatedUser(
+                self.form["username"],
+                self.form["password"],
+                LDAPObjectManager(),
+            )
         else:
             return NullUser()
 

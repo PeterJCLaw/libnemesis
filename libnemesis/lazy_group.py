@@ -1,12 +1,14 @@
 import srusers
 
 import user
+from ldap_manager import LDAPObjectManager
 
 class LazyGroup(object):
     """A lazy wrapper around an LDAP group."""
 
-    def __init__(self, group_name):
+    def __init__(self, group_name, ldap_manager=None):
         self._group_name = group_name
+        self._ldap_manager = ldap_manager or LDAPObjectManager()
         self._cached_group = None
         self._cached_users = None
 
@@ -25,7 +27,7 @@ class LazyGroup(object):
     def users(self):
         if self._cached_users is None:
             self._cached_users = [
-                user.User(un)
+                self._ldap_manager.get(user.User, un)
                 for un in self._group.members
             ]
 
