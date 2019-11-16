@@ -17,7 +17,7 @@ jobs:
           key: deps-venv-{{ .Branch }}-{{ checksum ".circleci/requirements.txt" }}
       - run:
           name: Install base dependencies
-          command: sudo apt install libsasl2-dev python-dev libldap2-dev libssl-dev
+          command: sudo apt install libsasl2-dev python-dev libldap2-dev libssl-dev ldap-utils
       - run:
           name: Create virtualenv
           command: |
