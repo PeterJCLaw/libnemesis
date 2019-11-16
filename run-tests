@@ -1,8 +1,12 @@
 #!/bin/sh
 python tests/reset_ldap.py
-if [ $? -ne 0 ]
+
+ret=$?
+
+if [ $ret -ne 0 ]
 then
-	echo 'Failed to reset LDAP' $?
+	echo 'Failed to reset LDAP'
+	exit $ret
 else
 	exec nosetests -d $*
 fi
