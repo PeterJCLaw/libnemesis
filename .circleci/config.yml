@@ -4,10 +4,9 @@ jobs:
   build:
     docker:
       - image: peterjclaw/sr-dev-ldap
-        command: ['--dont-touch-etc-hosts', '--loglevel', 'debug']
+        command: ['--loglevel', 'debug', '--cmd', 'sed s_ldap://localhost__ -i /container/service/slapd/startup.sh']
         environment:
           LDAP_LOG_LEVEL: 4
-          HOSTNAME: fake
 
     steps:
       - checkout
