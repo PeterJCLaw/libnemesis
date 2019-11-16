@@ -10,7 +10,7 @@ config = {
     'download_url': 'http://github.com/samphippen/libnemesis',
     'author_email': 'samphippen@googlemail.com',
     'version': '0.0.1',
-    'install_requires': ['nose', 'python-ldap'],
+    'install_requires': ['nose', 'python-ldap', 'Unidecode'],
     'packages': ['libnemesis'],
     'scripts': [],
     'name': 'libnemesis'
