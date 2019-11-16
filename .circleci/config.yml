@@ -6,7 +6,7 @@ jobs:
       - image: circleci/python:2.7
 
       - image: peterjclaw/sr-dev-ldap
-        command: ['-h', 'localhost', '--loglevel', 'debug']
+        command: ['--copy-service', '--loglevel', 'debug']
 
     steps:
       - checkout
