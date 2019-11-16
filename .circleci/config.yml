@@ -9,6 +9,7 @@ jobs:
         command: [
           '--loglevel', 'debug',
           '--cmd', 'sed s_ldap://$HOSTNAME__ -i /container/service/slapd/startup.sh',
+          '--cmd', 'sed -e s_# RFC2307bis schema_ps aux && apt-get update && apt-get install --yes lsof && lsof -i_ -i /container/service/slapd/startup.sh',
           '--cmd', 'cat /container/service/slapd/startup.sh'
         ]
         environment:
