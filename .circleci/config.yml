@@ -4,7 +4,9 @@ jobs:
   build:
     docker:
       - image: circleci/python:2.7
+
       - image: peterjclaw/sr-dev-ldap
+        command: ['--loglevel', 'debug']
 
     steps:
       - checkout
