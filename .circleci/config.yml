@@ -6,7 +6,9 @@ jobs:
       - image: circleci/python:2.7
 
       - image: peterjclaw/sr-dev-ldap
-        command: ['--dont-touch-etc-hosts', '--loglevel', 'debug']
+        command: ['--loglevel', 'debug']
+        environment:
+          HOSTNAME: localhost
 
     steps:
       - checkout
