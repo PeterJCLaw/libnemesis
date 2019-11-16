@@ -11,10 +11,24 @@ jobs:
 
       - run: git submodule update --init
 
+      # Set up a cached virtualenv in which to install dependencies
+      - restore_cache:
+          name: Restore dependency cache
+          key: deps-venv-{{ .Branch }}-{{ checksum ".circleci/requirements.txt" }}
       - run:
-          name: Install dependencies
+          name: Install base dependencies
+          command: sudo apt install libsasl2-dev python-dev libldap2-dev libssl-dev
+      - run:
+          name: Create virtualenv
           command: |
-            sudo apt install python-ldap
+            python -m virtualenv venv
+            . venv/bin/activate
+            pip install -r .circleci/requirements.txt
+      - save_cache:
+          name: Save dependency cache
+          key: deps-venv-{{ .Branch }}-{{ checksum ".circleci/requirements.txt" }}
+          paths:
+            - "venv"
 
       - run:
           name: Configure LDAP connection
@@ -26,4 +40,8 @@ jobs:
           name: Wait for LDAP server to be running
           command: sleep 5
 
-      - run: ./run-tests
+      - run:
+          name: Run tests
+          command: |
+            . venv/bin/activate
+            ./run-tests
