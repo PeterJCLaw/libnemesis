@@ -6,10 +6,9 @@ jobs:
       - image: circleci/python:2.7
 
       - image: peterjclaw/sr-dev-ldap
-        command: ['--dont-touch-etc-hosts', '--loglevel', 'debug']
+        command: ['--loglevel', 'debug', '--cmd', 'sed s_ldap://localhost__ -i /container/service/slapd/startup.sh']
         environment:
-          LDAP_LOG_LEVEL: 4
-          HOSTNAME: localhost
+          LDAP_LOG_LEVEL: 8
 
     steps:
       - checkout
