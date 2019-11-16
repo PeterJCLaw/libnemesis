@@ -8,6 +8,7 @@ jobs:
       - image: peterjclaw/sr-dev-ldap
         command: ['--dont-touch-etc-hosts', '--loglevel', 'debug']
         environment:
+          LDAP_LOG_LEVEL: 4
           HOSTNAME: localhost
 
     steps:
