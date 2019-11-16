@@ -6,7 +6,7 @@ jobs:
       - image: circleci/python:2.7
 
       - image: peterjclaw/sr-dev-ldap
-        command: ['--loglevel', 'debug', '--cmd', 'sed s_ldap://localhost__ -i /container/service/slapd/startup.sh']
+        command: ['--loglevel', 'debug', '--cmd', 'sed s_ldap://$HOSTNAME__ -i /container/service/slapd/startup.sh', '--cmd', 'cat /container/service/slapd/startup.sh']
         environment:
           LDAP_LOG_LEVEL: 8
 
