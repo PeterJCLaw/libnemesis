@@ -1,0 +1,29 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:2.7
+      - image: peterjclaw/sr-dev-ldap
+
+    steps:
+      - checkout
+
+      - run: git submodule update --init
+
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt install python-ldap
+
+      - run:
+          name: Configure LDAP connection
+          command: |
+            echo "[ldap]" > libnemesis/srusers/local.ini
+            echo "password = 123456" >> libnemesis/srusers/local.ini
+
+      - run:
+          name: Wait for LDAP server to be running
+          command: sleep 5
+
+      - run: ./run-tests
