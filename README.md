@@ -1,6 +1,6 @@
 # LibNemesis
 
-[![CircleCI](https://circleci.com/gh/PeterJCLaw/libnemesis.svg?style=svg)](https://circleci.com/gh/PeterJCLaw/libnemesis)
+[![CircleCI](https://circleci.com/gh/srobo/libnemesis.svg?style=svg)](https://circleci.com/gh/srobo/libnemesis)
 
 This is LibNemesis, primarliy intended as a backing library to
 [Nemesis](https://github.com/samphippen/nemesis), it provides high level
