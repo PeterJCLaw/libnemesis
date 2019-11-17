@@ -49,6 +49,7 @@ jobs:
       - run:
           name: Wait for LDAP server to be running
           command: |
+            sleep 10
             set +e
             for x in $(seq 60)
             do
