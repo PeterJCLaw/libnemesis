@@ -7,11 +7,7 @@ jobs:
 
       - image: peterjclaw/sr-dev-ldap
         name: sr-dev-ldap
-        command: [
-          '--loglevel', 'debug',
-          '--cmd', 'sed s_ldap://$HOSTNAME__ -i /container/service/slapd/startup.sh',
-          '--cmd', 'cat /container/service/slapd/startup.sh'
-        ]
+        command: ['--loglevel', 'debug']
         environment:
           LDAP_LOG_LEVEL: 8
 
