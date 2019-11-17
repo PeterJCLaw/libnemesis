@@ -1,5 +1,7 @@
 # LibNemesis
 
+[![CircleCI](https://circleci.com/gh/PeterJCLaw/libnemesis.svg?style=svg)](https://circleci.com/gh/PeterJCLaw/libnemesis)
+
 This is LibNemesis, primarliy intended as a backing library to
 [Nemesis](https://github.com/samphippen/nemesis), it provides high level
 functionality for organising users within a [Student Robotics](https://studentrobotics.org)
