@@ -3,16 +3,18 @@
 [![CircleCI](https://circleci.com/gh/srobo/libnemesis.svg?style=svg)](https://circleci.com/gh/srobo/libnemesis)
 
 This is LibNemesis, primarliy intended as a backing library to
-[Nemesis](https://github.com/samphippen/nemesis), it provides high level
+[Nemesis](https://github.com/srobo/nemesis), it provides high level
 functionality for organising users within a [Student Robotics](https://studentrobotics.org)
 [LDAP](https://www.studentrobotics.org/trac/wiki/LDAP) database.
 
 
 ## Contributing
 
-Please file issues on GitHub. Not on the Student Robotics trac. Also please
-send me a GitHub pull request if you want to merge changes in. This allows
-for easy management in my brain.
+Please file issues using the [GitHub issues](https://github.com/srobo/libnemesis/issues)
+for the [canonical repo](https://github.com/srobo/libnemesis).
+
+For actual changes, please make pull requests on GitHub against the srobo fork
+and ping [@PeterJCLaw](https://github.com/PeterJCLaw) for review.
 
 ## Development
 
