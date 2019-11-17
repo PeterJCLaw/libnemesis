@@ -54,7 +54,7 @@ jobs:
               then
                 sleep 0.5
               else
-                exit
+                exit 0
               fi
             done
 
