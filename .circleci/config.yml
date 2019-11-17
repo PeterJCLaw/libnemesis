@@ -43,7 +43,7 @@ jobs:
           name: Configure LDAP connection
           command: |
             echo "[ldap]" > libnemesis/srusers/local.ini
-            echo "host = localhost:3890" >> libnemesis/srusers/local.ini
+            echo "host = localhost:389" >> libnemesis/srusers/local.ini
             echo "password = 123456" >> libnemesis/srusers/local.ini
 
       - run:
@@ -52,7 +52,7 @@ jobs:
             set +e
             for x in $(seq 60)
             do
-              ldapsearch -h localhost -p 3890 -D 'cn=Manager,o=sr' -w 123456 -b 'o=sr'
+              ldapsearch -h localhost -p 389 -D 'cn=Manager,o=sr' -w 123456 -b 'o=sr'
               if [ $? -ne 0 ]
               then
                 sleep 0.5
