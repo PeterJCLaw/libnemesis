@@ -7,9 +7,6 @@ jobs:
 
       - image: peterjclaw/sr-dev-ldap
         name: sr-dev-ldap
-        command: ['--loglevel', 'debug']
-        environment:
-          LDAP_LOG_LEVEL: 8
 
     steps:
       - checkout
