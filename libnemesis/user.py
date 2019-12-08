@@ -6,6 +6,11 @@ from .team import Team
 from .college import College
 from . import constants
 
+try:
+    basestring
+except NameError:
+    basestring = (bytes, str)
+
 class User(object):
     @classmethod
     def create_user(cls, username, password=None):

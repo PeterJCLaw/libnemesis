@@ -2,6 +2,12 @@ from . import srusers
 
 from . import lazy_group
 
+try:
+    basestring
+except NameError:
+    basestring = (bytes, str)
+
+
 class College(lazy_group.LazyGroup):
     """A lazy wrapper around an LDAP group representing a college."""
 
