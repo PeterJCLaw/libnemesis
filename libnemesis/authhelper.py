@@ -1,6 +1,7 @@
-import srusers
 import json
-from user import AuthenticatedUser, NullUser
+
+from . import srusers
+from .user import AuthenticatedUser, NullUser
 
 class AuthHelper:
     def __init__(self, req):

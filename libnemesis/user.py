@@ -1,11 +1,10 @@
-
 import ldap.filter
 
-import srusers
+from . import srusers
 
-from team import Team
-from college import College
-import constants
+from .team import Team
+from .college import College
+from . import constants
 
 class User(object):
     @classmethod

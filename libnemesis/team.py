@@ -1,6 +1,6 @@
 import re
 
-import lazy_group
+from . import lazy_group
 
 class Team(lazy_group.LazyGroup):
     """A lazy wrapper around an LDAP group representing a team."""

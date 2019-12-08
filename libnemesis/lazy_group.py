@@ -1,6 +1,4 @@
-import srusers
-
-import user
+from . import srusers
 
 class LazyGroup(object):
     """A lazy wrapper around an LDAP group."""
@@ -23,6 +21,8 @@ class LazyGroup(object):
 
     @property
     def users(self):
+        from . import user  # Circular
+
         if self._cached_users is None:
             self._cached_users = [
                 user.User(un)
