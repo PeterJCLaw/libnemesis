@@ -15,11 +15,11 @@ class AuthHelper:
 
     @property
     def request_has_username(self):
-        return self.form.has_key("username")
+        return "username" in self.form
 
     @property
     def request_has_password(self):
-        return self.form.has_key("password")
+        return "password" in self.form
 
     @property
     def user_exists(self):
