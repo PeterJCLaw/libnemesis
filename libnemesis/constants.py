@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 
 COMPETITORS_GROUP = 'students'
 TEAM_LEADERS_GROUP = 'teachers'

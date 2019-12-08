@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 
 import time
 from nose.tools import assert_raises, with_setup
