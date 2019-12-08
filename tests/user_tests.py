@@ -298,7 +298,7 @@ def test_new_user_not_authed():
         User.create_new_user(ru, 'college-1', 'first', 'last')
         assert False
     except Exception as e:
-        assert "teacher_coll1" in e.message
+        assert "teacher_coll1" in str(e)
 
 @with_setup(remove_user('1_fl1'), remove_user('1_fl1'))
 def test_new_user_not_allowed():
@@ -307,7 +307,7 @@ def test_new_user_not_allowed():
         User.create_new_user(ru, 'college-1', 'first', 'last')
         assert False
     except Exception as e:
-        assert "student_coll1_1" in e.message
+        assert "student_coll1_1" in str(e)
 
 @with_setup(remove_user('2_fl1'), remove_user('2_fl1'))
 def test_new_user_wrong_college():
@@ -316,8 +316,8 @@ def test_new_user_wrong_college():
         User.create_new_user(ru, 'college-2', 'first', 'last')
         assert False
     except Exception as e:
-        assert "teacher_coll1" in e.message
-        assert 'college-2' in e.message
+        assert "teacher_coll1" in str(e)
+        assert 'college-2' in str(e)
 
 ## Group memberships
 
