@@ -72,7 +72,8 @@ def test_college_neq_string_works_self():
     assert (c != name) is False
 
 def test_all_colleges():
-    assert len(College.all_college_names()) == 2
+    all_college_names = sorted(College.all_college_names())
+    assert all_college_names == ["college-1", "college-2"]
 
 def test_load_speed():
     c = College("college-3")
