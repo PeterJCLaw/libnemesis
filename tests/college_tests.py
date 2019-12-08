@@ -91,7 +91,7 @@ def assert_college_1_details_dictionary_for(requesting_user):
     actual_name = data["name"]
     assert actual_name == "college the first"
 
-    actual_teams = data["teams"]
+    actual_teams = sorted(data["teams"])
     assert actual_teams == ["team-ABC", "team-DFE"]
 
     actual_counts = data["counts"]
