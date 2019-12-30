@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from libnemesis import Team
 
 def test_team_has_right_users():

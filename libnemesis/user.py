@@ -1,11 +1,15 @@
-
 import ldap.filter
 
-import srusers
+from . import srusers
 
-from team import Team
-from college import College
-import constants
+from .team import Team
+from .college import College
+from . import constants
+
+try:
+    basestring
+except NameError:
+    basestring = (bytes, str)
 
 class User(object):
     @classmethod

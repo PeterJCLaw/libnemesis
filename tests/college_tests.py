@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 
 import time
 from nose.tools import assert_raises, with_setup
@@ -81,7 +82,7 @@ def test_load_speed():
     t = time.time()
     c.users
     e = time.time()
-    print e-t
+    print(e-t)
     assert e-t < 1
 
 def assert_college_1_details_dictionary_for(requesting_user):
@@ -91,7 +92,7 @@ def assert_college_1_details_dictionary_for(requesting_user):
     actual_name = data["name"]
     assert actual_name == "college the first"
 
-    actual_teams = data["teams"]
+    actual_teams = sorted(data["teams"])
     assert actual_teams == ["team-ABC", "team-DFE"]
 
     actual_counts = data["counts"]

@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 
 from nose.tools import with_setup
 
@@ -81,12 +82,12 @@ def test_name_not_used():
     assert used == False
 
 def test_unicode_name_not_used():
-    andre = 'Andr' + u'\xe9' # Andre with e-acute
+    andre = 'Andr' + '\xe9' # Andre with e-acute
     used = User.name_used(andre, 'Smith')
     assert used == False
 
 def test_unicode_name_not_used_2():
-    bill_pony = u'Bill\u2658' # Bill plus white chess knight
+    bill_pony = 'Bill\u2658' # Bill plus white chess knight
     used = User.name_used(bill_pony, 'Smith')
     assert used == False
 
@@ -266,21 +267,21 @@ def test_new_user():
 @with_setup(remove_user('1_fl1'), remove_user('1_fl1'))
 def test_new_user_unicode():
     ru = User.create_user("teacher_coll1", "facebees")
-    first = u'f\xedrst'
-    u = User.create_new_user(ru, u'college-1', first, u'last')
-    check_new_user(u, first.encode('utf-8'))
+    first = 'f\xedrst'
+    u = User.create_new_user(ru, 'college-1', first, 'last')
+    check_new_user(u, first)
 
 @with_setup(remove_user('1_fl1'), remove_user('1_fl1'))
 def test_new_user_unicode_1():
     ru = User.create_user("teacher_coll1", "facebees")
-    first = u'first\u2658'
-    u = User.create_new_user(ru, u'college-1', first, u'last')
-    check_new_user(u, first.encode('utf-8'))
+    first = 'first\u2658'
+    u = User.create_new_user(ru, 'college-1', first, 'last')
+    check_new_user(u, first)
 
 @with_setup(remove_user('1_fl1'), remove_user('1_fl1'))
 def test_new_user_unicode_2():
     ru = User.create_user("teacher_coll1", "facebees")
-    u = User.create_new_user(ru, u'college-1', u'first', u'last')
+    u = User.create_new_user(ru, 'college-1', 'first', 'last')
     check_new_user(u)
 
 @with_setup(remove_user('1_fl1'), remove_user('1_fl1'))
@@ -297,7 +298,7 @@ def test_new_user_not_authed():
         User.create_new_user(ru, 'college-1', 'first', 'last')
         assert False
     except Exception as e:
-        assert "teacher_coll1" in e.message
+        assert "teacher_coll1" in str(e)
 
 @with_setup(remove_user('1_fl1'), remove_user('1_fl1'))
 def test_new_user_not_allowed():
@@ -306,7 +307,7 @@ def test_new_user_not_allowed():
         User.create_new_user(ru, 'college-1', 'first', 'last')
         assert False
     except Exception as e:
-        assert "student_coll1_1" in e.message
+        assert "student_coll1_1" in str(e)
 
 @with_setup(remove_user('2_fl1'), remove_user('2_fl1'))
 def test_new_user_wrong_college():
@@ -315,8 +316,8 @@ def test_new_user_wrong_college():
         User.create_new_user(ru, 'college-2', 'first', 'last')
         assert False
     except Exception as e:
-        assert "teacher_coll1" in e.message
-        assert 'college-2' in e.message
+        assert "teacher_coll1" in str(e)
+        assert 'college-2' in str(e)
 
 ## Group memberships
 
