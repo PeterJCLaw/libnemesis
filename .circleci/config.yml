@@ -30,7 +30,7 @@ jobs:
       # Set up a cached virtualenv in which to install dependencies
       - restore_cache:
           name: Restore dependency cache
-          key: deps-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: deps-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "requirements-dev.txt" }}
       - run:
           name: Install base dependencies
           command: sudo apt install libsasl2-dev python-dev libldap2-dev libssl-dev ldap-utils
@@ -39,10 +39,10 @@ jobs:
           command: |
             python -m virtualenv venv
             . venv/bin/activate
-            pip install -r requirements.txt
+            pip install -r requirements-dev.txt
       - save_cache:
           name: Save dependency cache
-          key: deps-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: deps-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "requirements-dev.txt" }}
           paths:
             - "venv"
 
@@ -93,7 +93,7 @@ jobs:
       # Set up a cached virtualenv in which to install dependencies
       - restore_cache:
           name: Restore dependency cache
-          key: deps-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: deps-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "requirements-dev.txt" }}
       - run:
           name: Install base dependencies
           command: sudo apt install libsasl2-dev python3-dev libldap2-dev libssl-dev ldap-utils
@@ -102,10 +102,10 @@ jobs:
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install -r requirements.txt
+            pip install -r requirements-dev.txt
       - save_cache:
           name: Save dependency cache
-          key: deps-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: deps-venv-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ checksum "requirements-dev.txt" }}
           paths:
             - "venv"
 
